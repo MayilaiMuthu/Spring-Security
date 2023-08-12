@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //		http.authorizeRequests().antMatchers("/user/**").fullyAuthenticated().and().httpBasic();
 //	}
 
-//	ROLE Based Authentication
+//	ROLE Based Authentication 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
