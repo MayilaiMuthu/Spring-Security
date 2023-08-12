@@ -10,7 +10,7 @@ public class UserController {
 	
 	@GetMapping("/test")
 	public String test() {
-		return "Welcome to Spring Security Service Basic";
+		return "Welcome to Spring Security Service User Basic";
 	}
 
 }

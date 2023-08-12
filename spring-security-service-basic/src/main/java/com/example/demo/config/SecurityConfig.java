@@ -19,10 +19,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		auth.inMemoryAuthentication().withUser("testuser1").password("userpass1").roles("ADMIN");
 	}
 	
+//	Full Authentication
+//	@Override
+//	protected void configure(HttpSecurity http) throws Exception {
+//		http.csrf().disable();
+//		http.authorizeRequests().anyRequest().fullyAuthenticated().and().httpBasic();
+//	}
+	
+//	URL Based Authentication
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
-		http.authorizeRequests().anyRequest().fullyAuthenticated().and().httpBasic();
+		http.authorizeRequests().antMatchers("/user/**").fullyAuthenticated().and().httpBasic();
 	}
 	
 	@Bean
