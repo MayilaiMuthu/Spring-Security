@@ -11,28 +11,36 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 @SuppressWarnings("deprecation")
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
-	
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("testuser").password("userpass").roles("ADMIN");
+		auth.inMemoryAuthentication().withUser("testuser").password("userpass").roles("USER");
 		auth.inMemoryAuthentication().withUser("testuser1").password("userpass1").roles("ADMIN");
 	}
-	
+
 //	Full Authentication
 //	@Override
 //	protected void configure(HttpSecurity http) throws Exception {
 //		http.csrf().disable();
 //		http.authorizeRequests().anyRequest().fullyAuthenticated().and().httpBasic();
 //	}
-	
+
 //	URL Based Authentication
+//	@Override
+//	protected void configure(HttpSecurity http) throws Exception {
+//		http.csrf().disable();
+//		http.authorizeRequests().antMatchers("/user/**").fullyAuthenticated().and().httpBasic();
+//	}
+
+//	ROLE Based Authentication
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
-		http.authorizeRequests().antMatchers("/user/**").fullyAuthenticated().and().httpBasic();
+		http.authorizeRequests().antMatchers("/admin/**").hasAnyRole("ADMIN").anyRequest().fullyAuthenticated().and()
+				.httpBasic();
 	}
-	
+
 	@Bean
 	NoOpPasswordEncoder encoder() {
 		return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
