@@ -30,6 +30,7 @@ public class LoginService {
 		} else {
 			Set<UserRole> roles = new HashSet<>();
 			roles.add(UserRole.builder().roleName("USER").build());
+//			roles.add(UserRole.builder().roleName("ADMIN").build());
 			UserInfo info = UserInfo.builder().userName(details.getUserName()).crDt(LocalDateTime.now())
 					.userPassword(encoder.encode(details.getPassword()))
 					.updDt(LocalDateTime.now()).userRoles(roles).build();
